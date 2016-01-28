@@ -398,7 +398,7 @@ public class GridView extends TiledView {
         int y = ts.y(utic);
         g2d.drawLine(0,y,w-1,y);
       }
-    } else if (_horizontal == Horizontal.USER){
+    } else if (_horizontal == Horizontal.USER && _hLines != null){
       for (int i = 0; i < _hLines.length; ++i) {
         double vtic = _hLines[i];
         double utic = vp.u(vtic);
@@ -422,7 +422,7 @@ public class GridView extends TiledView {
         int x = ts.x(utic);
         g2d.drawLine(x,0,x,h-1);
       }
-    } else if (_vertical == Vertical.USER){
+    } else if (_vertical == Vertical.USER && _vLines != null){
       for (int i = 0; i < _vLines.length; ++i) {
         double vtic = _vLines[i];
         double utic = hp.u(vtic);

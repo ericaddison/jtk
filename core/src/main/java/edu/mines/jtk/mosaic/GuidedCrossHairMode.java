@@ -10,7 +10,7 @@ public class GuidedCrossHairMode extends CrossHairMode {
 	private static final long serialVersionUID = 1L;
 	private float[] _f;
 	
-	protected GuidedCrossHairMode(ModeManager manager, float[] f) {
+	public GuidedCrossHairMode(ModeManager manager, float[] f) {
 		super(manager);
 		setName("GuidedCrossHair");
 		setShortDescription("Display crosshairs at location of specified function");

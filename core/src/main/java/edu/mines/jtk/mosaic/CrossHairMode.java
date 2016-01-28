@@ -18,7 +18,7 @@ public class CrossHairMode extends Mode{
 	protected CrossHairView xhairView;
 	protected Tile _tile;
 	
-	protected CrossHairMode(ModeManager manager) {
+	public CrossHairMode(ModeManager manager) {
 		super(manager);
 		setName("CrossHair");
 		setShortDescription("Display crosshairs at mouse location");
@@ -40,6 +40,10 @@ public class CrossHairMode extends Mode{
 				((Tile)component).removeTiledView(xhairView);
 			}
 		}
+	}
+	
+	public GridView getGridView(){
+	  return xhairView;
 	}
 	
 	// this mode is not exclusive
