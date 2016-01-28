@@ -38,6 +38,7 @@ public class GridView extends TiledView {
     NONE,
     ZERO,
     MAJOR,
+    USER
   }
 
   /**
@@ -49,7 +50,8 @@ public class GridView extends TiledView {
   public enum Vertical {
     NONE,
     ZERO,
-    MAJOR
+    MAJOR,
+    USER
   }
 
   /**
@@ -133,6 +135,29 @@ public class GridView extends TiledView {
     setParameters(parameters);
   }
 
+
+  /**
+   * Constructs a grid view of arbitrary horizontal and vertical lines.
+   * 
+   * @param horizontal
+   *            the grid horizontal type.
+   * @param vertical
+   *            the grid vertical type.
+   * @param y
+   *            the horizontal line y locations.
+   * @param x
+   *            the vertical line x locations.
+   */
+  public GridView(float[] hLineY, float[] vLineX) {
+    Horizontal hor = (hLineY == null) ? Horizontal.NONE : Horizontal.USER;
+    Vertical ver = (vLineX == null) ? Vertical.NONE : Vertical.USER;
+    setHorizontal(hor);
+    setVertical(ver);
+    _hLines = hLineY;
+    _vLines = vLineX;
+  } 
+   
+  
   /**
    * Sets the grid horizontal type.
    * The default grid horizontal type is major.
@@ -182,6 +207,32 @@ public class GridView extends TiledView {
     }
   }
 
+
+  /**
+   * Sets the locations for drawing arbitrary vertical lines
+   * 
+   * @param x
+   *            vertical line locations.
+   */
+  public void setVLineLocations(float[] x) {
+    setVertical(Vertical.USER);
+    _vLines = x;
+    repaint();
+  }
+
+  /**
+   * Sets the locations for drawing arbitrary vertical lines
+   * 
+   * @param y
+   *            horizontal line locations.
+   */
+  public void setHLineLocations(float[] y) {
+    setHorizontal(Horizontal.USER);
+    _hLines = y;
+    repaint();
+  } 
+  
+  
   /**
    * Sets the grid types, color, and style parameters from a string.
    * This method provides a convenient way to set the grid horizontal
@@ -347,6 +398,13 @@ public class GridView extends TiledView {
         int y = ts.y(utic);
         g2d.drawLine(0,y,w-1,y);
       }
+    } else if (_horizontal == Horizontal.USER){
+      for (int i = 0; i < _hLines.length; ++i) {
+        double vtic = _hLines[i];
+        double utic = vp.u(vtic);
+        int y = ts.y(utic);
+        g2d.drawLine(0, y, w - 1, y);
+      }
     }
     
     // Vertical grid lines.
@@ -364,6 +422,13 @@ public class GridView extends TiledView {
         int x = ts.x(utic);
         g2d.drawLine(x,0,x,h-1);
       }
+    } else if (_vertical == Vertical.USER){
+      for (int i = 0; i < _vLines.length; ++i) {
+        double vtic = _vLines[i];
+        double utic = hp.u(vtic);
+        int x = ts.x(utic);
+        g2d.drawLine(x, 0, x, h - 1);
+      }
     }
   }
 
@@ -374,6 +439,8 @@ public class GridView extends TiledView {
   private Vertical _vertical = Vertical.MAJOR;
   private Style _style = Style.SOLID;
   private Color _color = null;
+  private float[] _hLines;
+  private float[] _vLines;
 
   private boolean equalColors(Color ca, Color cb) {
     return (ca==null)?cb==null:ca.equals(cb);
