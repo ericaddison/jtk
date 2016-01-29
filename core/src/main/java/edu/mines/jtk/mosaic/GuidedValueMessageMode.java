@@ -31,13 +31,23 @@ public class GuidedValueMessageMode extends ValueMessageMode{
 		_f = f;
 	}
 	
-	public GuidedValueMessageMode(ModeManager manager, JLabel label, String x, String y) {
-		super(manager,label,x,y);
+	public GuidedValueMessageMode(ModeManager manager, JLabel label, String s1, String s2, String s3) {
+		super(manager,label,s1,s2,s3);
 		_f = null;
 	}
 	
-	public GuidedValueMessageMode(ModeManager manager, JLabel label, String x, String y, float[] f) {
-		super(manager,label,x,y);
+	public GuidedValueMessageMode(ModeManager manager, JLabel label, String s1, String s2) {
+		super(manager,label,s1,s2);
+		_f = null;
+	}
+	
+	public GuidedValueMessageMode(ModeManager manager, JLabel label, String s1, String s2, String s3, float[] f) {
+		super(manager,label,s1,s2,s3);
+		_f = f;
+	}
+	
+	public GuidedValueMessageMode(ModeManager manager, JLabel label, String s1, String s2, float[] f) {
+		super(manager,label,s1,s2);
 		_f = f;
 	}
 	

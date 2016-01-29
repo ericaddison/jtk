@@ -53,7 +53,7 @@ public class CrosshairAndValueMessageDemo {
     // make ValueMessageModes
     ValueMessageMode vmm = new ValueMessageMode(mm,valueL);
     vmm.setActive(true);
-    ValueMessageMode gvmm = new GuidedValueMessageMode(mm,gvalueL,"x","f(x)",y);
+    ValueMessageMode gvmm = new GuidedValueMessageMode(mm,gvalueL,"x: ",", f(x): ",y);
     gvmm.setActive(true);
     
     

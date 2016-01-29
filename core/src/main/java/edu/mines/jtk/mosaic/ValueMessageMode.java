@@ -21,37 +21,50 @@ public class ValueMessageMode extends Mode{
 	protected DecimalFormat _df;
 	protected Tile _tile;
 	private JLabel _messageLabel;
-	private String _xlabel = "x";
-	private String _ylabel = "y";
+	private String _pre = "(";
+	private String _mid = " , ";
+	private String _post = ")";
 
-	public ValueMessageMode(ModeManager manager, JLabel label, String x, String y) {
+	public ValueMessageMode(ModeManager manager, JLabel label, String s1, String s2, String s3) {
 		super(manager);
 		_messageLabel = label;
-		setup(x,y);
+		setup(s1,s2,s3);
 	}	
+	
+	public ValueMessageMode(ModeManager manager, JLabel label, String s1, String s2) {
+		super(manager);
+		_messageLabel = label;
+		setup(s1,s2,"");
+	}
 	
 	public ValueMessageMode(ModeManager manager, JLabel label) {
 		super(manager);
 		_messageLabel = label;
-		setup("x","y");
+		setup("("," , ",")");
 	}
 
 	public ValueMessageMode(ModeManager manager) {
 		super(manager);
-		setup("x","y");
+		setup("("," , ",")");
 	}	
 	
-	public ValueMessageMode(ModeManager manager, String x, String y) {
+	public ValueMessageMode(ModeManager manager, String s1, String s2, String s3) {
 		super(manager);
-		setup(x,y);
+		setup(s1,s2,s3);
+	}
+	
+	public ValueMessageMode(ModeManager manager, String s1, String s2) {
+		super(manager);
+		setup(s1,s2,"");
 	}
 	
 	
-	private void setup(String x, String y){
+	private void setup(String pre, String mid, String post){
 		setName("ValueMessage");
 		setShortDescription("Display mouse location values in message bar");
-		_xlabel = x;
-		_ylabel = y;
+		_pre = pre;
+		_mid = mid;
+		_post = post;
 		// number format
 		_df = new DecimalFormat();
 		_df.setMaximumFractionDigits(3);
@@ -70,12 +83,16 @@ public class ValueMessageMode extends Mode{
 		}
 	}
 
-	public void setXlabel(String x){
-		_xlabel = x;
+	public void setPreString(String pre){
+		_pre = pre;
 	}
 	
-	public void setYlabel(String y){
-		_ylabel = y;
+	public void setMidString(String mid){
+		_mid = mid;
+	}
+	
+	public void setPostString(String post){
+		_post = post;
 	}
 	
 	
@@ -93,7 +110,7 @@ public class ValueMessageMode extends Mode{
 	
 	public void updateMessage(String[] s){
 		if(s[0] != null && s[1] != null && _messageLabel != null)
-			_messageLabel.setText(_xlabel + ": " + s[0] + " | " + _ylabel + ": " + s[1]);
+			_messageLabel.setText(_pre + s[0] + _mid + s[1] + _post);
 	}
 	
 	public String[] updateValues(Point p){
