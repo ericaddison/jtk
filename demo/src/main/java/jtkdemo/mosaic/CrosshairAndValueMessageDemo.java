@@ -2,7 +2,6 @@ package jtkdemo.mosaic;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -57,7 +56,7 @@ public class CrosshairAndValueMessageDemo {
     
     // make ValueMessageModes
     ValueMessageMode vmm = new ValueMessageMode(mm,valueL);
-    ValueMessageMode gvmm = new GuidedValueMessageMode(mm,gvalueL,"x","f(x)",y);
+    ValueMessageMode gvmm = new GuidedValueMessageMode(mm,gvalueL,"x: ",", f(x): ",y);
     
     
     // make a toolbar for the modes
