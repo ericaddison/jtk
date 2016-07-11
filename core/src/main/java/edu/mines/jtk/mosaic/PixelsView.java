@@ -64,7 +64,8 @@ public class PixelsView extends TiledView implements ColorMapped {
    */
   public enum Orientation {
     X1RIGHT_X2UP,
-    X1DOWN_X2RIGHT
+    X1DOWN_X2RIGHT,
+    X1UP_X2RIGHT
   }
 
   /**
@@ -649,7 +650,17 @@ public class PixelsView extends TiledView implements ColorMapped {
       _ny = n2;
       _dy = d2;
       _fy = f2;
-    }
+    } else if (_orientation==Orientation.X1UP_X2RIGHT) {
+        _transposed = true;
+        _xflipped = false;
+        _yflipped = true;
+        _nx = n2;
+        _dx = d2;
+        _fx = f2;
+        _ny = n1;
+        _dy = d1;
+        _fy = f1;
+      } 
     updateBestProjectors();
   }
 
