@@ -64,9 +64,15 @@ public class PixelsView extends TiledView implements ColorMapped {
    */
   public enum Orientation {
     X1RIGHT_X2UP,
+    X1RIGHT_X2DOWN,
+    X1LEFT_X2UP,
+    X1LEFT_X2DOWN,
     X1DOWN_X2RIGHT,
-    X1UP_X2RIGHT
+    X1DOWN_X2LEFT,
+    X1UP_X2RIGHT,
+    X1UP_X2LEFT
   }
+
 
   /**
    * Method used to interpolate pixels between samples of f(x1,x2).
@@ -640,6 +646,36 @@ public class PixelsView extends TiledView implements ColorMapped {
       _ny = n1;
       _dy = d1;
       _fy = f1;
+    } else if (_orientation==Orientation.X1UP_X2RIGHT) {
+      _transposed = true;
+      _xflipped = false;
+      _yflipped = true;
+      _nx = n2;
+      _dx = d2;
+      _fx = f2;
+      _ny = n1;
+      _dy = d1;
+      _fy = f1;
+    } else if (_orientation==Orientation.X1DOWN_X2LEFT) {
+      _transposed = true;
+      _xflipped = true;
+      _yflipped = false;
+      _nx = n2;
+      _dx = d2;
+      _fx = f2;
+      _ny = n1;
+      _dy = d1;
+      _fy = f1;
+    } else if (_orientation==Orientation.X1UP_X2LEFT) {
+      _transposed = true;
+      _xflipped = true;
+      _yflipped = true;
+      _nx = n2;
+      _dx = d2;
+      _fx = f2;
+      _ny = n1;
+      _dy = d1;
+      _fy = f1;
     } else if (_orientation==Orientation.X1RIGHT_X2UP) {
       _transposed = false;
       _xflipped = false;
@@ -650,17 +686,37 @@ public class PixelsView extends TiledView implements ColorMapped {
       _ny = n2;
       _dy = d2;
       _fy = f2;
-    } else if (_orientation==Orientation.X1UP_X2RIGHT) {
-        _transposed = true;
-        _xflipped = false;
-        _yflipped = true;
-        _nx = n2;
-        _dx = d2;
-        _fx = f2;
-        _ny = n1;
-        _dy = d1;
-        _fy = f1;
-      } 
+    } else if (_orientation==Orientation.X1RIGHT_X2DOWN) {
+      _transposed = false;
+      _xflipped = false;
+      _yflipped = false;
+      _nx = n1;
+      _dx = d1;
+      _fx = f1;
+      _ny = n2;
+      _dy = d2;
+      _fy = f2;
+    } else if (_orientation==Orientation.X1LEFT_X2UP) {
+      _transposed = false;
+      _xflipped = true;
+      _yflipped = true;
+      _nx = n1;
+      _dx = d1;
+      _fx = f1;
+      _ny = n2;
+      _dy = d2;
+      _fy = f2;
+    } else if (_orientation==Orientation.X1LEFT_X2DOWN) {
+      _transposed = false;
+      _xflipped = true;
+      _yflipped = false;
+      _nx = n1;
+      _dx = d1;
+      _fx = f1;
+      _ny = n2;
+      _dy = d2;
+      _fy = f2;
+    }
     updateBestProjectors();
   }
 
@@ -676,7 +732,7 @@ public class PixelsView extends TiledView implements ColorMapped {
     double y0 = _fy;
     double y1 = _fy+_dy*(_ny-1);
     if (_xflipped) {
-      double xt = y0;
+      double xt = x0;
       x0 = x1;
       x1 = xt;
     }
